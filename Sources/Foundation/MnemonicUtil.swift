@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreBitcoin
-
+// hcs
 public struct MnemonicUtil {
   public static func btcMnemonicFromEngWords(_ words: String) -> BTCMnemonic {
     return BTCMnemonic(words: words.split(separator: " "), password: "", wordListType: BTCMnemonicWordListType.english)!
