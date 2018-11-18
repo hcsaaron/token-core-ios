@@ -53,7 +53,7 @@ class KDFPerformanceTests: XCTestCase { // Do NOT inherit from TestCase, which d
     var metadata = WalletMeta(source: .newIdentity)
     metadata.name = "kdf tweak"
     metadata.network = .mainnet
-    let (mnemonic, identity) = try! Identity.createIdentity(password: TestData.password, metadata: metadata)
+    let (mnemonic, identity) = try! Identity.createIdentity(chainTypes: [.eth, .btc], password: TestData.password, metadata: metadata)
 
     measure {
       Crypto.ScryptKdfparams.defaultN = 262_144

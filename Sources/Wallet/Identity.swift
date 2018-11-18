@@ -33,10 +33,10 @@ public final class Identity {
     return keystore.wallets
   }
 
-  init(metadata: WalletMeta, mnemonic: String, password: String) throws {
+  public init(chainTypes: [ChainType], metadata: WalletMeta, mnemonic: String, password: String) throws {
     keystore = try IdentityKeystore(metadata: metadata, mnemonic: mnemonic, password: password)
 
-    _ = try deriveWallets(for: [.eth, .btc], mnemonic: mnemonic, password: password)
+    _ = try deriveWallets(for: chainTypes, mnemonic: mnemonic, password: password)
 
     _ = Identity.storage.flushIdentity(keystore)
   }
@@ -76,16 +76,16 @@ public final class Identity {
 
 // MARK: Factory And Storage
 public extension Identity {
-  static func createIdentity(password: String, metadata: WalletMeta) throws -> (String, Identity) {
+  static func createIdentity(chainTypes: [ChainType], password: String, metadata: WalletMeta) throws -> (String, Identity) {
     let mnemonic = MnemonicUtil.generateMnemonic()
 
-    let identity = try Identity(metadata: metadata, mnemonic: mnemonic, password: password)
+    let identity = try Identity(chainTypes: chainTypes, metadata: metadata, mnemonic: mnemonic, password: password)
     currentIdentity = identity
     return (mnemonic, identity)
   }
 
-  static func recoverIdentity(metadata: WalletMeta, mnemonic: String, password: String) throws -> Identity {
-    let identity = try Identity(metadata: metadata, mnemonic: mnemonic, password: password)
+  static func recoverIdentity(chainTypes: [ChainType], metadata: WalletMeta, mnemonic: String, password: String) throws -> Identity {
+    let identity = try Identity(chainTypes: chainTypes, metadata: metadata, mnemonic: mnemonic, password: password)
     currentIdentity = identity
     return identity
   }
@@ -282,7 +282,7 @@ extension Identity {
     }
   }
 
-  func deriveWallets(for chainTypes: [ChainType], mnemonic: String, password: String) throws -> [BasicWallet] {
+  public func deriveWallets(for chainTypes: [ChainType], mnemonic: String, password: String) throws -> [BasicWallet] {
     return try chainTypes.map { chainType in
       var meta = WalletMeta(chain: chainType, source: keystore.meta.source)
       meta.passwordHint = keystore.meta.passwordHint

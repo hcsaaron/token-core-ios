@@ -8,15 +8,15 @@
 
 import Foundation
 
-struct ETHKeystore: ExportableKeystore, PrivateKeyCrypto {
-  let id: String
-  let version = 3
-  var address: String
-  let crypto: Crypto
-  var meta: WalletMeta
+public struct ETHKeystore: ExportableKeystore, PrivateKeyCrypto {
+  public let id: String
+  public let version = 3
+  public var address: String
+  public let crypto: Crypto
+  public var meta: WalletMeta
 
   // Import from private key
-  init(password: String, privateKey: String, metadata: WalletMeta, id: String? = nil) throws {
+  public init(password: String, privateKey: String, metadata: WalletMeta, id: String? = nil) throws {
     address = ETHKey(privateKey: privateKey).address
     crypto = Crypto(password: password, privateKey: privateKey)
     self.id = id ?? ETHKeystore.generateKeystoreId()
@@ -24,7 +24,7 @@ struct ETHKeystore: ExportableKeystore, PrivateKeyCrypto {
   }
 
   // MARK: - JSON
-  init(json: JSONObject) throws {
+  public init(json: JSONObject) throws {
     guard
       let cryptoJson = (json["crypto"] as? JSONObject) ?? (json["Crypto"] as? JSONObject),
       json["version"] as? Int == version
@@ -43,7 +43,7 @@ struct ETHKeystore: ExportableKeystore, PrivateKeyCrypto {
     }
   }
 
-  func serializeToMap() -> [String: Any] {
+  public func serializeToMap() -> [String: Any] {
     return [
       "id": id,
       "address": address,

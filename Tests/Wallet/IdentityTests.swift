@@ -16,7 +16,7 @@ class IdentityTests: TestCase {
       metadata.network = .testnet
       metadata.passwordHint = TestData.passwordHint
       metadata.name = "xyz"
-      let mnemonicAndIdentity = try Identity.createIdentity(password: TestData.password, metadata: metadata)
+      let mnemonicAndIdentity = try Identity.createIdentity(chainTypes: [.eth, .btc], password: TestData.password, metadata: metadata)
 
       let identity = mnemonicAndIdentity.1
       XCTAssertNotNil(identity.keystore.identifier, "Should has identifier")

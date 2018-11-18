@@ -10,11 +10,11 @@ import Foundation
 import CoreBitcoin
 
 public struct IdentityKeystore {
-  static let defaultVersion = 10000
+  public static let defaultVersion = 10000
 
-  var id: String
+  public var id: String
   public let identifier: String
-  let version: Int
+  public let version: Int
   let crypto: Crypto
   var meta: WalletMeta
   let encAuthKey: EncryptedMessage
@@ -41,7 +41,7 @@ public struct IdentityKeystore {
 }
 
 extension IdentityKeystore {
-  init(metadata: WalletMeta, mnemonic: Mnemonic, password: String) throws {
+  public init(metadata: WalletMeta, mnemonic: Mnemonic, password: String) throws {
     version = IdentityKeystore.defaultVersion
     id = ETHKeystore.generateKeystoreId()
 

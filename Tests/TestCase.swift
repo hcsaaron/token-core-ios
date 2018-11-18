@@ -56,7 +56,7 @@ class TestCase: XCTestCase {
     metadata.name = "xyz"
     metadata.passwordHint = TestData.passwordHint
     metadata.network = .mainnet
-    _ = try! Identity.createIdentity(password: TestData.password, metadata: metadata)
+    _ = try! Identity.createIdentity(chainTypes: [.eth, .btc], password: TestData.password, metadata: metadata)
   }
 
   override func tearDown() {

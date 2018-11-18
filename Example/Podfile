@@ -3,5 +3,5 @@ platform :ios, "11.2"
 target "Example" do
   use_frameworks!
 
-  pod "TokenCore", git: "https://github.com/consenlabs/token-core-ios.git"
+  pod "TokenCore", git: "https://github.com/hcsaaron/token-core-ios.git"
 end

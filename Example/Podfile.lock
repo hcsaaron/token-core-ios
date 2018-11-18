@@ -10,7 +10,7 @@ PODS:
     - GRKOpenSSLFramework
 
 DEPENDENCIES:
-  - TokenCore (from `https://github.com/consenlabs/token-core-ios.git`)
+  - TokenCore (from `https://github.com/hcsaaron/token-core-ios.git`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -21,12 +21,12 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   TokenCore:
-    :git: https://github.com/consenlabs/token-core-ios.git
+    :git: https://github.com/hcsaaron/token-core-ios.git
 
 CHECKOUT OPTIONS:
   TokenCore:
-    :commit: bb38707021a78bb34599cbc5c5b1085446c2131b
-    :git: https://github.com/consenlabs/token-core-ios.git
+    :commit: 033eb4336f766e3818fe6b40e801e00500091f40
+    :git: https://github.com/hcsaaron/token-core-ios.git
 
 SPEC CHECKSUMS:
   BigInt: a7864bcecd2976bced91963baef90079dbdcca25
@@ -35,6 +35,6 @@ SPEC CHECKSUMS:
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   TokenCore: c57b3e85b320361eadfc224868c013ef2d875542
 
-PODFILE CHECKSUM: 4c21ebe365fb6455415f6325e9ef333aa3b32c16
+PODFILE CHECKSUM: 90cfd397c93a1e895f1bcee53de02106cf0c20b9
 
 COCOAPODS: 1.5.3
