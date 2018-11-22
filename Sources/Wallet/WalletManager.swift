@@ -178,8 +178,9 @@ public struct WalletManager {
         return key
       }
     }
-
-    let changeAddress = changeKey.address(on: isTestnet ? .testnet : .mainnet, segWit: segWit)
+    // 由于源码中的changeAddress似乎不是wallet本身，导致找零的钱不知道去哪了，因此将找零地址改为钱包地址（知道原理的朋友望告知）
+//    let changeAddress = changeKey.address(on: isTestnet ? .testnet : .mainnet, segWit: segWit)
+    let changeAddress: BTCAddress! = BTCAddress(string: wallet.address)
     let signer = try BTCTransactionSigner(utxos: utxos, keys: privateKeys, amount: amount, fee: fee, toAddress: toAddress, changeAddress: changeAddress)
 
     if segWit.isSegWit {
