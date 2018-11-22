@@ -17,7 +17,7 @@ public struct ETHMnemonicKeystore: ExportableKeystore, EncMnemonicKeystore, Priv
   let encMnemonic: EncryptedMessage
   let mnemonicPath: String
 
-  init(password: String, mnemonic: String, path: String, metadata: WalletMeta, id: String? = nil) throws {
+  public init(password: String, mnemonic: String, path: String, metadata: WalletMeta, id: String? = nil) throws {
     self.id = id ?? ETHMnemonicKeystore.generateKeystoreId()
     meta = metadata
 
@@ -29,7 +29,7 @@ public struct ETHMnemonicKeystore: ExportableKeystore, EncMnemonicKeystore, Priv
     address = ethKey.address
   }
 
-  init(json: JSONObject) throws {
+  public init(json: JSONObject) throws {
     guard
       let cryptoJson = (json["crypto"] as? JSONObject) ?? (json["Crypto"] as? JSONObject),
       json["version"] as? Int == version,
