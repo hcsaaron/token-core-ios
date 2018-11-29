@@ -63,7 +63,7 @@ public struct BTCMnemonicKeystore: Keystore, EncMnemonicKeystore, XPrvCrypto {
   }
   
   // 黄楚升添加，导出私钥
-  public func exportPrivateKey(password: String, mnemonic: String) throws -> String {
+  public func exportPrivateKey(mnemonic: String) throws -> String {
     guard let btcMnemonic = BTCMnemonic(words: mnemonic.split(separator: " "), password: "", wordListType: .english),
       let seedData = btcMnemonic.seed else {
         throw MnemonicError.wordInvalid
