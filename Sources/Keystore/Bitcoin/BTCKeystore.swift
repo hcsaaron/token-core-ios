@@ -9,15 +9,15 @@
 import Foundation
 import CoreBitcoin
 
-struct BTCKeystore: Keystore, WIFCrypto {
-  let id: String
-  let version = 3
-  var address: String
-  let crypto: Crypto
-  var meta: WalletMeta
+public struct BTCKeystore: Keystore, WIFCrypto {
+  public let id: String
+  public let version = 3
+  public var address: String
+  public let crypto: Crypto
+  public var meta: WalletMeta
 
   // Import with private key (WIF).
-  init(password: String, wif: String, metadata: WalletMeta, id: String? = nil) throws {
+  public init(password: String, wif: String, metadata: WalletMeta, id: String? = nil) throws {
     let privateKey = try PrivateKeyValidator(wif, on: .btc, network: metadata.network, requireCompressed: metadata.isSegWit).validate()
 
     let key = BTCKey(wif: wif)!
@@ -29,7 +29,7 @@ struct BTCKeystore: Keystore, WIFCrypto {
   }
 
   // MARK: - JSON
-  init(json: JSONObject) throws {
+  public init(json: JSONObject) throws {
     guard
       let cryptoJson = (json["crypto"] as? JSONObject) ?? (json["Crypto"] as? JSONObject),
       json["version"] as? Int == version
@@ -48,13 +48,13 @@ struct BTCKeystore: Keystore, WIFCrypto {
     }
   }
 
-  func decryptWIF(_ password: String) -> String {
+  public func decryptWIF(_ password: String) -> String {
     let wif = crypto.privateKey(password: password).tk_fromHexString()
     let key = BTCKey(wif: wif)!
     return meta.isMainnet ? key.wif : key.wifTestnet
   }
 
-  func serializeToMap() -> [String: Any] {
+  public func serializeToMap() -> [String: Any] {
     return [
       "id": id,
       "address": address,

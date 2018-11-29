@@ -14,7 +14,7 @@ public typealias MnemonicSeed = String // Hex encoded seed
 
 // Implimentation of BIP-39 style mnemonic codes for use with generating deterministic keys.
 // https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki
-class ETHMnemonic {
+public class ETHMnemonic {
   let mnemonic: Mnemonic
   let seed: MnemonicSeed
 
@@ -67,7 +67,7 @@ extension ETHMnemonic {
   // used as the password and the string "mnemonic" + passphrase (again in UTF-8 NFKD) used as the salt.
   // The iteration count is set to 2048 and HMAC-SHA512 is used as the pseudo-random function. The length
   // of the derived key is 512 bits (= 64 bytes).
-  class func deterministicSeed(from mnemonic: Mnemonic, passphrase: String = "") -> MnemonicSeed {
+  public class func deterministicSeed(from mnemonic: Mnemonic, passphrase: String = "") -> MnemonicSeed {
     let data = mnemonic.data(using: .ascii, allowLossyConversion: true)!
     let dataString = String(data: data, encoding: .ascii)!
 

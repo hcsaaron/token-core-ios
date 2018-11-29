@@ -61,6 +61,23 @@ public struct BTCMnemonicKeystore: Keystore, EncMnemonicKeystore, XPrvCrypto {
 
     meta = metadata
   }
+  
+  // 黄楚升添加，导出私钥
+  public func exportPrivateKey(password: String, mnemonic: String) throws -> String {
+    guard let btcMnemonic = BTCMnemonic(words: mnemonic.split(separator: " "), password: "", wordListType: .english),
+      let seedData = btcMnemonic.seed else {
+        throw MnemonicError.wordInvalid
+    }
+
+    let btcNetwork = self.meta.isMainnet == true ? BTCNetwork.mainnet() : BTCNetwork.testnet()
+
+    guard let masterKeychain = BTCKeychain(seed: seedData, network: btcNetwork),
+      let accountKeychain = masterKeychain.derivedKeychain(withPath: "\(mnemonicPath)/0/0") else {
+        throw GenericError.unknownError
+    }
+    let indexKey = accountKeychain.key!
+    return indexKey.privateKeyAddress.string
+  }
 
   private func derivedKey(for password: String) -> String {
     let key = crypto.derivedKey(with: password)
