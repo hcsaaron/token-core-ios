@@ -76,7 +76,7 @@ public struct BTCMnemonicKeystore: Keystore, EncMnemonicKeystore, XPrvCrypto {
         throw GenericError.unknownError
     }
     let indexKey = accountKeychain.key!
-    return indexKey.privateKeyAddress.string
+    return self.meta.isMainnet ? indexKey.privateKeyAddress.string: indexKey.privateKeyAddressTestnet.string
   }
 
   private func derivedKey(for password: String) -> String {
