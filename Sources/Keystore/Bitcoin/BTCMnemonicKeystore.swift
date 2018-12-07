@@ -94,7 +94,7 @@ public struct BTCMnemonicKeystore: Keystore, EncMnemonicKeystore, XPrvCrypto {
     return indexKey.address(on: meta.network, segWit: meta.segWit).string
   }
 
-  init(json: JSONObject) throws {
+  public init(json: JSONObject) throws {
     version = (json["version"] as? Int) ?? BTCMnemonicKeystore.defaultVersion
 
     guard let cryptoJSON = json["crypto"] as? JSONObject else {
